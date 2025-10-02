@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Controlo de Votos</title>
+</head>
+<body>
+  <h1>Verificar Voto</h1>
+  <input type="text" id="socioInput" placeholder="Número de Sócio">
+  <button onclick="verificar()">Verificar</button>
+  <div id="resultado"></div>
+
+  <script>
+    async function verificar() {
+      const socio = document.getElementById("socioInput").value;
+      const response = await fetch("https://n8n-n8n.tunkdr.easypanel.host/webhook-test/verificar-voto", {
+        method: "POST",
+        body: JSON.stringify({ socio: socio }),
+        headers: { "Content-Type": "application/json" }
+      });
+      const texto = await response.text();
+      document.getElementById("resultado").innerText = texto;
+    }
+  </script>
+</body>
+</html>
